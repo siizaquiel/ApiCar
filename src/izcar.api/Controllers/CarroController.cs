@@ -34,7 +34,7 @@ namespace izcar.api.Controllers
         }
 
 
-       /* [HttpGet ("{id:int}")]
+        [HttpGet ("{id:int}")]
         public IActionResult GetById(int id)
         {
             var carro = _carros.Where(a => a.Id == id).FirstOrDefault();
@@ -45,7 +45,7 @@ namespace izcar.api.Controllers
             }
 
             return Ok(carro);
-        } */
+        } 
 
 
          [HttpGet ("{placa}")]
@@ -61,5 +61,17 @@ namespace izcar.api.Controllers
             return Ok(carro);
         }
 
-    }
+        [HttpPost]
+        public IActionResult Post(Carro model)
+        {
+            if (string.IsNullOrEmpty(model.Modelo))
+            {
+                return BadRequest("Campo Obrigatório");
+            }
+            
+            return Created("/Carro", model);
+
+        }
+    } 
+
 }
